@@ -17,7 +17,10 @@ class JOJO_Plugin_jojo_galleryrss extends JOJO_Plugin
     {
         global $smarty;
 
-        require_once(_PLUGINDIR . '/jojo_galleryrss/external/SimplePie/simplepie.inc');
+        foreach (Jojo::listPlugins('external/SimplePie/simplepie.inc') as $pluginfile) {
+            require_once($pluginfile);
+            break;
+        }
 
         /* Find all [[galleryrss:rssurl]] tags */
         preg_match_all('/\[\[galleryrss:([^\]]*)\]\]/', $content, $matches);
